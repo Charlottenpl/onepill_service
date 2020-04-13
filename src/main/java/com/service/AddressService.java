@@ -18,11 +18,13 @@ public class AddressService
     @Resource
     private AddressRepository addressRepository;
 
+    //查询全部地址
     public List<Address> listAll()
     {
         return addressRepository.findAll();
     }
 
+    //根据ID查询地址
     public Address findById(int id)
     {
         Address address = null;
@@ -32,27 +34,32 @@ public class AddressService
         return address;
     }
 
+    //添加或者保存地址
     public void saveAddress(Address address)
     {
         addressRepository.save(address);
     }
 
+    //删除地址
     public void delAddress(int id)
     {
         addressRepository.deleteById(Integer.valueOf(id));
     }
 
+    //更新地址
     public Address updateAddress(Address address)
     {
         addressRepository.save(address);
         return findById(address.getId());
     }
 
+    //根据UserId查询地址
     public List findByUserId(String userId)
     {
         return addressRepository.findByUserId(userId);
     }
 
+    //判断ID为id的地址是否存在
     public boolean isExist(int id)
     {
         return addressRepository.findById(Integer.valueOf(id)).isPresent();
