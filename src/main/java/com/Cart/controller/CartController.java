@@ -60,7 +60,7 @@ public class CartController {
     }
 
     //更改购物车
-    @RequestMapping(value = "/uodate",method = RequestMethod.POST)
+    @RequestMapping(value = "/update",method = RequestMethod.POST)
     public String update(@RequestParam("json")String json){
         try{
             this.cartService.add(gson.fromJson(json,Cart.class));

@@ -5,10 +5,8 @@ import com.entity.Doctor;
 import com.entity.Focus;
 import com.google.gson.Gson;
 import com.google.gson.reflect.TypeToken;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestMethod;
-import org.springframework.web.bind.annotation.RequestParam;
-import org.springframework.web.bind.annotation.RestController;
+import javafx.geometry.Pos;
+import org.springframework.web.bind.annotation.*;
 
 import javax.annotation.Resource;
 import java.lang.reflect.Type;
@@ -45,7 +43,6 @@ public class FocusController {
         }
     }
 
-
     //新增收藏
     @RequestMapping(value = "/add",method = RequestMethod.POST)
     public String delete(@RequestParam("json") String json){
@@ -60,7 +57,8 @@ public class FocusController {
 
 
     //isHave
-    public String isHave(int userId,int userType,int type,int typeId){
+    @PostMapping("/isHave")
+    public String isHave(@RequestParam("userId") int userId,@RequestParam("userType") int userType,@RequestParam("type") int type,@RequestParam("typeId") int typeId){
         try{
             this.focusService.isHave(userId,userType,type,typeId);
             return "yes";

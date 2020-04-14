@@ -19,6 +19,7 @@ public class CommentController {
     CommentService commentService;
     Gson gson = new Gson();
 
+    //获取文章的所以评论
     @RequestMapping(value = "/getComment",method = RequestMethod.GET)
     public String findByArticleId(@RequestParam("articleId")int articleId){
         return gson.toJson(this.commentService.findByArticleId(articleId));
