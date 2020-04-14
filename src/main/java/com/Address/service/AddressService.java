@@ -3,9 +3,9 @@
 // Decompiler options: packimports(3) 
 // Source File Name:   AddressService.java
 
-package com.service;
+package com.Address.service;
 
-import com.Dao.AddressRepository;
+import com.Address.Dao.AddressRepository;
 import com.entity.Address;
 import org.springframework.stereotype.Service;
 
@@ -46,15 +46,8 @@ public class AddressService
         addressRepository.deleteById(Integer.valueOf(id));
     }
 
-    //更新地址
-    public Address updateAddress(Address address)
-    {
-        addressRepository.save(address);
-        return findById(address.getId());
-    }
-
     //根据UserId查询地址
-    public List findByUserId(String userId)
+    public List findByUserId(int userId)
     {
         return addressRepository.findByUserId(userId);
     }
