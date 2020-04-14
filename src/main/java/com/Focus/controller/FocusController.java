@@ -23,13 +23,13 @@ public class FocusController {
     Gson gson = new Gson();
 
     //获取收藏医生列表
-    @RequestMapping(value = "/doctorList")
+    @RequestMapping(value = "/doctorList",method = RequestMethod.GET)
     public String findDoctor(@RequestParam("userId") int userId,@RequestParam("userType") int userType){
         return gson.toJson(this.focusService.findDoctorList(userId,userType));
     }
 
     //获取收藏药品列表
-    @RequestMapping(value = "/medicineList")
+    @RequestMapping(value = "/medicineList",method = RequestMethod.GET)
     public String findMedicine(@RequestParam("userId") int userId,@RequestParam("userType") int userType){
         return gson.toJson(this.focusService.findMedicine(userId,userType));
     }

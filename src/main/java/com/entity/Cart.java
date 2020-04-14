@@ -13,8 +13,6 @@ public class Cart {
     private int medicineId;
     private int count;
     private int price;
-    private String medicineName;
-    private String medicineSize;
     private int status;
 
     public int getId() {
@@ -57,21 +55,6 @@ public class Cart {
         this.price = price;
     }
 
-    public String getMedicineName() {
-        return medicineName;
-    }
-
-    public void setMedicineName(String medicineName) {
-        this.medicineName = medicineName;
-    }
-
-    public String getMedicineSize() {
-        return medicineSize;
-    }
-
-    public void setMedicineSize(String medicineSize) {
-        this.medicineSize = medicineSize;
-    }
 
     public int getStatus() {
         return status;
@@ -89,8 +72,6 @@ public class Cart {
                 ", medicineId=" + medicineId +
                 ", count=" + count +
                 ", price=" + price +
-                ", medicineName='" + medicineName + '\'' +
-                ", medicineSize='" + medicineSize + '\'' +
                 ", status=" + status +
                 '}';
     }

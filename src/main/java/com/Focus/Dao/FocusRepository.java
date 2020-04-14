@@ -9,11 +9,8 @@ import java.util.List;
 
 public interface FocusRepository extends JpaRepository<Focus,Integer> {
 
-    //查询收藏医生列表
-    public List<Doctor> findByUserIdAndUserTypeAndType(int userId,int userType,int type);
-
-    //查询收藏药品列表
-    public List<Medicine> findFocusByUserIdAndUserTypeAndType(int userId,int userType,int type);
+    //查询收藏列表
+    public List<Focus> findByUserIdAndUserTypeAndType(int userId,int userType,int type);
 
     //根据userId和typeId删除
     public void deleteByUserIdAndUserTypeAndTypeIdAndType(int userId,int userType,int typeId,int type);

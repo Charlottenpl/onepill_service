@@ -20,14 +20,14 @@ public class FocusService {
 
 
     //获取收藏医生列表
-    public List<Doctor> findDoctorList(int userId,int userType){
+    public List<Focus> findDoctorList(int userId,int userType){
         return this.focusRepository.findByUserIdAndUserTypeAndType(userId,userType,1);
     }
 
 
     //获取收藏药品列表
-    public List<Medicine> findMedicine(int userId,int userType){
-        return this.focusRepository.findFocusByUserIdAndUserTypeAndType(userId,userType,2);
+    public List<Focus> findMedicine(int userId,int userType){
+        return this.focusRepository.findByUserIdAndUserTypeAndType(userId,userType,2);
     }
 
 

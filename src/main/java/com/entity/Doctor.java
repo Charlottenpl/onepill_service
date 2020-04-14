@@ -15,7 +15,7 @@ public class Doctor {
     private String password;
     private String PID;
     private String hospital;
-//    private String tag;
+    private String tag;
     private String headImg;
     private String licence1;
     private String licence2;
@@ -109,6 +109,14 @@ public class Doctor {
         this.resume = resume;
     }
 
+    public String getTag() {
+        return tag;
+    }
+
+    public void setTag(String tag) {
+        this.tag = tag;
+    }
+
     @Override
     public String toString() {
         return "Doctor{" +
@@ -119,6 +127,7 @@ public class Doctor {
                 ", password='" + password + '\'' +
                 ", PID='" + PID + '\'' +
                 ", hospital='" + hospital + '\'' +
+                ", tag='" + tag + '\'' +
                 ", headImg='" + headImg + '\'' +
                 ", licence1='" + licence1 + '\'' +
                 ", licence2='" + licence2 + '\'' +

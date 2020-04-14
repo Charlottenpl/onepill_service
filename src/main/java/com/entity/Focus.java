@@ -13,9 +13,6 @@ public class Focus {
     private int userType;//用户类型（1：医生2：用户）
     private int type;//关注类型（1：医生2：药品）
     private int typeId;//关注对象Id
-    private String img;//展示图片
-    private String name;//名称
-    private String more;//介绍
 
     public int getId() {
         return id;
@@ -57,30 +54,6 @@ public class Focus {
         this.typeId = typeId;
     }
 
-    public String getImg() {
-        return img;
-    }
-
-    public void setImg(String img) {
-        this.img = img;
-    }
-
-    public String getName() {
-        return name;
-    }
-
-    public void setName(String name) {
-        this.name = name;
-    }
-
-    public String getMore() {
-        return more;
-    }
-
-    public void setMore(String more) {
-        this.more = more;
-    }
-
     @Override
     public String toString() {
         return "Focus{" +
@@ -89,9 +62,6 @@ public class Focus {
                 ", userType=" + userType +
                 ", type=" + type +
                 ", typeId=" + typeId +
-                ", img='" + img + '\'' +
-                ", name='" + name + '\'' +
-                ", more='" + more + '\'' +
                 '}';
     }
 }

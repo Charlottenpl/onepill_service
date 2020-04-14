@@ -26,7 +26,7 @@ public class AddressController {
 
 
     //查询所有地址
-    @RequestMapping(value = "/list")
+    @RequestMapping(value = "/list",method = RequestMethod.GET)
     public String list()
     {
         java.util.List addressList = addressService.listAll();
