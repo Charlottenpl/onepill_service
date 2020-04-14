@@ -5,9 +5,6 @@ import javax.persistence.*;
 @Entity
 @Table(name = "tbl_article")
 public class Article {
-
-    @Id
-    @GeneratedValue(strategy= GenerationType.IDENTITY)
     private int id;
     private String title;
     private String headImg;
@@ -15,6 +12,8 @@ public class Article {
     private String tag;
     private String writerName;
 
+    @Id
+    @GeneratedValue(strategy= GenerationType.IDENTITY)
     public int getId() {
         return id;
     }

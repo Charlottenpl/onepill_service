@@ -6,8 +6,6 @@ import javax.persistence.*;
 @Table(name = "tbl_user")
 public class User {
 
-    @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private int id;
     private String nickName;
     private String phone;
@@ -16,6 +14,8 @@ public class User {
     private String headImg;
     private String address;
 
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     public int getId() {
         return id;
     }

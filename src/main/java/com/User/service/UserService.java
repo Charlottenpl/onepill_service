@@ -1,6 +1,7 @@
 package com.User.service;
 
 import com.User.Dao.UserRepository;
+import com.entity.User;
 import com.google.gson.Gson;
 import org.springframework.stereotype.Service;
 
@@ -11,7 +12,7 @@ public class UserService {
 
     @Resource
     UserRepository userRepository;
-    Gson gson = new Gson();
-
-
+    public User userLogin(String phone,String password){
+        return userRepository.findUserByPhoneAndPassword(phone, password);
+    }
 }
