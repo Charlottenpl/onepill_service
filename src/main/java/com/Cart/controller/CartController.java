@@ -4,6 +4,8 @@ package com.Cart.controller;
 import com.entity.Cart;
 import com.google.gson.Gson;
 import com.Cart.service.CartService;
+import io.swagger.annotations.Api;
+import io.swagger.annotations.ApiOperation;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
@@ -14,6 +16,7 @@ import java.util.List;
 
 @RestController
 @RequestMapping("/cart")
+@Api("购物车服务器")
 public class CartController {
 
     @Resource
@@ -21,6 +24,7 @@ public class CartController {
     Gson gson = new Gson();
 
     //获取所有购物车信息
+    @ApiOperation("获取所有购物车信息")
     @RequestMapping(value = "/list",method = RequestMethod.GET)
     public String list()
     {
@@ -30,6 +34,7 @@ public class CartController {
     }
 
     //根据UserId查询购物车信息
+    @ApiOperation("根据UserId查询购物车信息")
     @RequestMapping(value = "/findByUserId",method = RequestMethod.GET)
     public String findByUserId(@RequestParam("userId")int userId){
         List<Cart> cartList = this.cartService.findByUserId(userId);
@@ -38,6 +43,7 @@ public class CartController {
     }
 
     //增加购物车
+    @ApiOperation("添加购物车")
     @RequestMapping(value = "/add",method = RequestMethod.POST)
     public String add(@RequestParam("json")String json){
         try{
@@ -49,6 +55,7 @@ public class CartController {
         }
     }
     //根据ID删除购物车
+    @ApiOperation("移出购物车")
     @RequestMapping(value = "/delete",method = RequestMethod.POST)
     public String delete(@RequestParam("id")int id){
         try{
@@ -60,6 +67,7 @@ public class CartController {
     }
 
     //更改购物车
+    @ApiOperation("更新购物车")
     @RequestMapping(value = "/update",method = RequestMethod.POST)
     public String update(@RequestParam("json")String json){
         try{

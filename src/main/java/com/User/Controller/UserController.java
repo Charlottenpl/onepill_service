@@ -4,6 +4,8 @@ import com.User.service.UserService;
 import com.entity.Result;
 import com.entity.User;
 import com.google.gson.Gson;
+import io.swagger.annotations.Api;
+import io.swagger.annotations.ApiOperation;
 import org.springframework.data.repository.query.Param;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
@@ -14,12 +16,14 @@ import javax.annotation.Resource;
 
 @RestController
 @RequestMapping("/user")
+@Api("用户服务器")
 public class UserController {
     Gson gson = null;
 
     @Resource
     private UserService userService;
 
+    @ApiOperation("用户登陆")
     @RequestMapping(value = "/login",method = RequestMethod.GET)
     public String userLogin(@RequestParam (name = "phone") String phone,@RequestParam(name = "password") String password){
         System.out.println("开始登陆");
