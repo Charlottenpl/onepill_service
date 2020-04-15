@@ -30,7 +30,7 @@ public class CommentController {
     }
 
     //添加评论
-    @RequestMapping(value = "/addComment",method = RequestMethod.POST)
+    @RequestMapping(value = "/add",method = RequestMethod.POST)
     @ApiOperation("添加评论")
     public String add(@RequestParam(name = "json")String json){
         try{
