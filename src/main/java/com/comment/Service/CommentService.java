@@ -15,7 +15,7 @@ public class CommentService {
 
     //根据article查询
     public List<Comment> findByArticleId(int id){
-        return this.findByArticleId(id);
+        return commentRepository.findByArticleId(id);
     }
 
     //添加评论

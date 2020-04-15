@@ -6,14 +6,14 @@ import javax.persistence.*;
 @Table(name = "tbl_comment")
 public class Comment {
 
-    @Id
-    @GeneratedValue(strategy= GenerationType.IDENTITY)
     private int id;
     private String name;
     private String ccomment;
     private String headImg;
     private int articleId;
 
+    @Id
+    @GeneratedValue(strategy= GenerationType.IDENTITY)
     public int getId() {
         return id;
     }

@@ -25,20 +25,20 @@ public class CommentController {
     //获取文章的所有评论
     @RequestMapping(value = "/getComment",method = RequestMethod.GET)
     @ApiOperation("获取文章的所有评论")
-    public String findByArticleId(@RequestParam("articleId")int articleId){
+    public String findByArticleId(@RequestParam(name = "articleId")int articleId){
         return gson.toJson(this.commentService.findByArticleId(articleId));
     }
 
     //添加评论
+    @RequestMapping(value = "/addComment",method = RequestMethod.POST)
     @ApiOperation("添加评论")
-    @RequestMapping(value = "/add",method = RequestMethod.POST)
-    public String add(@RequestParam("json")String json){
+    public String add(@RequestParam(name = "json")String json){
         try{
             Comment comment = gson.fromJson(json, Comment.class);
             this.commentService.add(comment);
-            return "yes";
+            return "true";
         }catch (Exception e){
-            return "no";
+            return "false";
         }
     }
 }
