@@ -14,9 +14,19 @@ public class DoctorService {
     @Resource
     DoctorRepository doctorRepository;
 
+    //医生登录
+    public Doctor doctorLogin(String phone,String password){
+        return this.doctorRepository.findDoctorByPhoneAndPassword(phone, password);
+    }
     //增加医生
-    public void add(Doctor doctor){
-        this.doctorRepository.save(doctor);
+    public boolean add(Doctor doctor){
+        try {
+            this.doctorRepository.save(doctor);
+            return true;
+        }catch (Exception e){
+            e.printStackTrace();
+            return false;
+        }
     }
 
     //根据ID删除医生

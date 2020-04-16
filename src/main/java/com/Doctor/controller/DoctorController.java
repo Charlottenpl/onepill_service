@@ -1,16 +1,15 @@
 package com.Doctor.controller;
 
 
-import com.Doctor.Dao.DoctorRepository;
-import com.entity.Comment;
+import com.Doctor.service.DoctorService;
 import com.entity.Doctor;
+import com.entity.Result;
 import com.google.gson.Gson;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
 import org.springframework.web.bind.annotation.*;
 
 import javax.annotation.Resource;
-import javax.print.Doc;
 
 @RestController
 @RequestMapping("/doctor")
@@ -18,20 +17,50 @@ import javax.print.Doc;
 public class DoctorController {
 
     @Resource
-    DoctorRepository doctorRepository;
-    Gson gson = new Gson();
+    private DoctorService doctorService;
+    Gson gson = null;
 
+    //医生登录
+    @RequestMapping(value = "/login",method = RequestMethod.GET)
+    public String doctorLogin(@RequestParam(name = "phone") String phone, @RequestParam(name = "password") String password){
+        Doctor doctor = doctorService.doctorLogin(phone, password);
+        Result result = new Result();
+        gson = new Gson();
+        if(doctor.getPhone().equals(phone) && doctor.getPassword().equals(password)){
+            result.setCode(1);
+            result.setDoctor(doctor);
+            String str1 = gson.toJson(result);
+            System.out.println("医生登录成功！");
+            return str1;
+        }else if(!doctor.getPhone().equals(phone)){
+            result.setCode(2);
+            result.setDoctor(doctor);
+            String str2 = gson.toJson(result);
+            System.out.println("医生登录失败,电话错误！");
+            return str2;
+        }else if(!doctor.getPassword().equals(password)){
+            result.setCode(3);
+            result.setDoctor(doctor);
+            String str3 = gson.toJson(result);
+            System.out.println("医生登录失败,密码错误！");
+            return str3;
+        }
+        return null;
+    }
 
     //添加医生
     @ApiOperation("增加医生")
     @RequestMapping(value = "/add",method = RequestMethod.POST)
     public String add(@RequestParam("json")String json){
-        try{
-            Doctor doctor = gson.fromJson(json, Doctor.class);
-            this.doctorRepository.save(doctor);
-            return "yes";
-        }catch (Exception e){
-            return "no";
+        gson = new Gson();
+        Doctor doctor = gson.fromJson(json, Doctor.class);
+        boolean isSuccessful = this.doctorService.add(doctor);
+        if (isSuccessful) {
+            String result = gson.toJson(true);
+            return result;
+        } else {
+            String result = gson.toJson(false);
+            return result;
         }
     }
 
@@ -40,7 +69,7 @@ public class DoctorController {
     @RequestMapping(value = "/delete",method = RequestMethod.POST)
     public String delete(@RequestParam("id")int id){
         try{
-            this.doctorRepository.deleteById(id);
+            this.doctorService.delete(id);
             return "yes";
         }catch (Exception e){
             return "no";
@@ -51,14 +80,14 @@ public class DoctorController {
     @ApiOperation("查询所有医生")
     @RequestMapping(value = "/doctor",method = RequestMethod.POST)
     public String list(){
-        return gson.toJson(this.doctorRepository.findAll());
+        return gson.toJson(this.doctorService.findAllDoctor());
     }
 
     //根据Id查询医生
     @ApiOperation("根据Id查询医生")
     @RequestMapping(value = "/findById",method = RequestMethod.GET)
     public String findById(@RequestParam("id")int id){
-        return gson.toJson(this.doctorRepository.findById(id));
+        return gson.toJson(this.doctorService.findById(id));
     }
 
     //更新医生信息
@@ -67,12 +96,12 @@ public class DoctorController {
     public String update(@RequestParam("id")int id,@RequestParam("code")String code,@RequestParam("str")String str){
         try{
             //获取Id
-            Doctor doctor = this.doctorRepository.findById(id);
+            Doctor doctor = this.doctorService.findById(id);
             switch (code){
                 case "name":
                     doctor.setName(str);
                     break;
-                case "phonne":
+                case "phone":
                     doctor.setPhone(str);
                     break;
                 case "address":
@@ -97,7 +126,7 @@ public class DoctorController {
                     doctor.setResume(str);
                     break;
             }
-            this.doctorRepository.save(doctor);
+            this.doctorService.add(doctor);
             return "yes";
         }catch (Exception e){
             return "no";
@@ -108,6 +137,6 @@ public class DoctorController {
     @ApiOperation("更新医生信息")
     @GetMapping(value = "/findByName")
     public String findByName(@RequestParam("name")String name){
-        return gson.toJson(this.doctorRepository.findByName(name));
+        return gson.toJson(this.doctorService.findByName(name));
     }
 }

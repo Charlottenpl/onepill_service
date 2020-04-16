@@ -4,10 +4,8 @@ import com.User.service.UserService;
 import com.entity.Result;
 import com.entity.User;
 import com.google.gson.Gson;
-import com.google.gson.JsonObject;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
-import org.springframework.data.repository.query.Param;
 import org.springframework.web.bind.annotation.*;
 
 import javax.annotation.Resource;
