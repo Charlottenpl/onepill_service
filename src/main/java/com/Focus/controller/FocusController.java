@@ -32,14 +32,14 @@ public class FocusController {
 
     //获取收藏药品列表
     @ApiOperation("获取收藏药品的列表")
-    @RequestMapping(value = "/medicineList",method = RequestMethod.GET)
+        @RequestMapping(value = "/medicineList",method = RequestMethod.GET)
     public String findMedicine(@RequestParam("userId") int userId,@RequestParam("userType") int userType){
         return gson.toJson(this.focusService.findMedicine(userId,userType));
     }
 
     //取消收藏
     @ApiOperation("取消收藏")
-    @RequestMapping(value = "/delete",method = RequestMethod.POST)
+    @RequestMapping(value = "/delete",method = RequestMethod.GET)
     public String delete(@RequestParam("userId") int userId,@RequestParam("userType") int userType,@RequestParam("type") int type,@RequestParam("typeId") int typeId){
         try{
             this.focusService.delete(userId,userType,type,typeId);
@@ -64,7 +64,7 @@ public class FocusController {
 
 
     //isHave
-    @PostMapping("/isHave")
+    @GetMapping("/isHave")
     @ApiOperation("查询是否收藏")
     public String isHave(@RequestParam("userId") int userId,@RequestParam("userType") int userType,@RequestParam("type") int type,@RequestParam("typeId") int typeId){
         try{

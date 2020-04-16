@@ -14,7 +14,7 @@ import javax.annotation.Resource;
 
 @RestController
 @RequestMapping("/user")
-@Api("用户服务器")
+@Api( value = "用户服务器")
 public class UserController {
     Gson gson = null;
 

@@ -71,7 +71,7 @@ public class AddressController {
     //删除地址
     @ApiOperation(value = "删除地址",notes = "在数据库中删除地址")
     @ApiImplicitParam(name = "id", value = "地址的ID", paramType = "query", required = true, dataType = "Integer")
-    @RequestMapping(value = "/delete",method = RequestMethod.POST)
+    @RequestMapping(value = "/delete",method = RequestMethod.GET)
     public String delete(@RequestParam("id") int id)
     {
 
@@ -86,7 +86,7 @@ public class AddressController {
     //根据UserId查询地址
     @ApiOperation(value = "根据UserId查询地址",notes = "在数据库中根据UserId查询地址")
     @ApiImplicitParam(name = "userId", value = "要查询的userId", paramType = "query", required = true, dataType = "Integer")
-    @RequestMapping(value = "findByUserId",method = RequestMethod.GET)
+    @RequestMapping(value = "/findByUserId",method = RequestMethod.GET)
     public List<Address> findAddressByUserId(@RequestParam("userId") int userId){
         return this.addressService.findByUserId(userId);
     }
