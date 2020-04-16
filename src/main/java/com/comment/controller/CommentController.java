@@ -6,10 +6,7 @@ import com.entity.Comment;
 import com.google.gson.Gson;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestMethod;
-import org.springframework.web.bind.annotation.RequestParam;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 import javax.annotation.Resource;
 
@@ -32,7 +29,7 @@ public class CommentController {
     //添加评论
     @RequestMapping(value = "/add",method = RequestMethod.POST)
     @ApiOperation("添加评论")
-    public String add(@RequestParam(name = "json")String json){
+    public String add(@RequestBody String json){
         try{
             Comment comment = gson.fromJson(json, Comment.class);
             this.commentService.add(comment);
