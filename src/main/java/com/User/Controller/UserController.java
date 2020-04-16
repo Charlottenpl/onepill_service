@@ -4,6 +4,7 @@ import com.User.service.UserService;
 import com.entity.Result;
 import com.entity.User;
 import com.google.gson.Gson;
+import com.google.gson.JsonObject;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
 import org.springframework.data.repository.query.Param;
@@ -89,5 +90,19 @@ public class UserController {
     @GetMapping("/findById")
     public String findById(@RequestParam("id")int id){
         return gson.toJson(this.userService.findById(id));
+    }
+
+    @RequestMapping(value = "/register", method = RequestMethod.POST)
+    public String userRegister(@RequestBody String json) {
+        this.gson = new Gson();
+        User user = gson.fromJson(json,User.class);
+        boolean isSuccessful = this.userService.userRegister(user);
+        if (isSuccessful) {
+            String result = gson.toJson(true);
+            return result;
+        } else {
+            String result = gson.toJson(false);
+            return result;
+        }
     }
 }

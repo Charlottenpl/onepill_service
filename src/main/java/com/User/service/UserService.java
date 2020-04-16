@@ -32,4 +32,15 @@ public class UserService {
     public User findById(int id){
         return this.userRepository.findById(id);
     }
+
+    //用户（病人）注册
+    public boolean userRegister(User user) {
+        try {
+            userRepository.save(user);
+            return true;
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        return false;
+    }
 }
