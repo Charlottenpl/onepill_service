@@ -8,4 +8,7 @@ public interface MedicineRepository extends JpaRepository<Medicine,Integer> {
     //根据Id查询
     public Medicine findById(int id);
 
+    //根据name查询
+    public Medicine findByMedicine(String name);
+
 }

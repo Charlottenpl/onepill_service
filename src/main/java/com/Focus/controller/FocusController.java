@@ -42,6 +42,7 @@ public class FocusController {
     @RequestMapping(value = "/delete",method = RequestMethod.GET)
     public String delete(@RequestParam("userId") int userId,@RequestParam("userType") int userType,@RequestParam("type") int type,@RequestParam("typeId") int typeId){
         try{
+            System.out.println("!!!!!!"+userId+userType+type+typeId);
             this.focusService.delete(userId,userType,type,typeId);
             return "yes";
         }catch (Exception e){
@@ -67,11 +68,12 @@ public class FocusController {
     @GetMapping("/isHave")
     @ApiOperation("查询是否收藏")
     public String isHave(@RequestParam("userId") int userId,@RequestParam("userType") int userType,@RequestParam("type") int type,@RequestParam("typeId") int typeId){
-        try{
-            this.focusService.isHave(userId,userType,type,typeId);
+
+        if (this.focusService.isHave(userId,userType,type,typeId)) {
             return "yes";
-        }catch (Exception e){
+        } else {
             return "no";
         }
+
     }
 }

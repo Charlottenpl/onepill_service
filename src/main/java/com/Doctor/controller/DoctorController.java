@@ -18,7 +18,7 @@ public class DoctorController {
 
     @Resource
     private DoctorService doctorService;
-    Gson gson = null;
+    Gson gson = new Gson();
 
     //医生登录
     @RequestMapping(value = "/login",method = RequestMethod.GET)
@@ -87,6 +87,7 @@ public class DoctorController {
     @ApiOperation("根据Id查询医生")
     @RequestMapping(value = "/findById",method = RequestMethod.GET)
     public String findById(@RequestParam("id")int id){
+        System.out.println("查询的Id："+id);
         return gson.toJson(this.doctorService.findById(id));
     }
 

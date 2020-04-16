@@ -20,7 +20,7 @@ public class CartService {
 
     //根据UserId查询
     public List<Cart> findByUserId(int userId){
-        return this.findByUserId(userId);
+        return this.cartRepository.findByUserId(userId);
     }
 
     //添加

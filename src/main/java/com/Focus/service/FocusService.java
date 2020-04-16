@@ -33,7 +33,9 @@ public class FocusService {
 
     //取消收藏
     public void delete(int userId,int userType,int type,int typeId){
-        this.focusRepository.deleteByUserIdAndUserTypeAndTypeIdAndType(userId,userType,typeId,type);
+        System.out.println("取消收藏");
+        Focus focus = this.focusRepository.findFocusByUserIdAndUserTypeAndTypeIdAndType(userId,userType,typeId,type);
+        this.focusRepository.deleteById(focus.getId());
     }
 
 

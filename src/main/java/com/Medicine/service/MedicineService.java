@@ -33,4 +33,9 @@ public class MedicineService {
     public Medicine findById(int id){
         return this.medicineRepository.findById(id);
     }
+
+    //根据Name查询
+    public Medicine findByName(String name){
+        return this.medicineRepository.findByMedicine(name);
+    }
 }

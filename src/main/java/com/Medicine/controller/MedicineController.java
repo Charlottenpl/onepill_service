@@ -52,9 +52,16 @@ public class MedicineController {
     }
     //根据Id查询
     @ApiOperation("根据ID查询药品")
-    @PostMapping("/findById")
+    @GetMapping("/findById")
     public String findById(@RequestParam("id")int id){
         return gson.toJson(this.medicineService.findById(id));
+    }
+
+    //根据Name查询
+    @ApiOperation("根据Name查询药品")
+    @GetMapping("/findByName")
+    public String findByName(@RequestParam("name")String name){
+        return gson.toJson(this.medicineService.findByName(name));
     }
 
     //更新
