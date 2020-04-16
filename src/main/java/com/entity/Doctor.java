@@ -5,9 +5,6 @@ import javax.persistence.*;
 @Entity
 @Table(name = "tbl_doctor")
 public class Doctor {
-
-    @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private int id;
     private String name;
     private String phone;
@@ -20,7 +17,8 @@ public class Doctor {
     private String licence1;
     private String licence2;
     private String resume;
-
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     public int getId() {
         return id;
     }
