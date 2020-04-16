@@ -45,9 +45,10 @@ public class CartController {
     public String findByUserId(@RequestParam("userId")int userId){
         List<Cart> cartList = this.cartService.findByUserId(userId);
         List<MyCart> myCartList = new ArrayList<>();
-        MyCart myCart = new MyCart();
         Medicine medicine = null;
-        for (Cart c:cartList) {
+        for (int i= 0;i<cartList.size();i++) {
+            MyCart myCart = new MyCart();
+            Cart c= cartList.get(i);
             System.out.println(c.getId()+"\n"+c.getMedicineId()+"\n");
             medicine = this.medicineService.findById(c.getMedicineId());
             myCart.setUserId(c.getUserId());
@@ -58,9 +59,10 @@ public class CartController {
             myCart.setStandard(medicine.getStandard());
             myCart.setPrice(c.getPrice());
             myCart.setStatus(c.getStatus());
-            myCartList.add(myCart);
+            myCartList.add(i,myCart);
         }
         String result = gson.toJson(myCartList);
+        System.out.println(result);
         return result;
     }
 
