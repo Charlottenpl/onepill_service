@@ -50,7 +50,7 @@ public class DoctorController {
 
     //添加医生
     @ApiOperation("增加医生")
-    @RequestMapping(value = "/add",method = RequestMethod.POST)
+    @RequestMapping(value = "/register",method = RequestMethod.POST)
     public String add(@RequestParam("json")String json){
         gson = new Gson();
         Doctor doctor = gson.fromJson(json, Doctor.class);
