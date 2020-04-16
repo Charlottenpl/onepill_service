@@ -6,10 +6,7 @@ import com.entity.Order;
 import com.google.gson.Gson;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestParam;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 import javax.annotation.Resource;
 
@@ -49,14 +46,14 @@ public class OrderController {
 
     //根据Id
     @ApiOperation("根据ID查询订单")
-    @PostMapping("/findById")
+    @GetMapping("/findById")
     public String findById(@RequestParam("id")int id){
         return gson.toJson(this.orderService.findById(id));
     }
 
     //根据userId
     @ApiOperation("根据userId查询订单")
-    @PostMapping("/findByUserId")
+    @GetMapping("/findByUserId")
     public String findByUserId(@RequestParam("userId")int userId){
         return gson.toJson(this.orderService.findByUserId(userId));
     }
