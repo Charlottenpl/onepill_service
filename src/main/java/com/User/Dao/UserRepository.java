@@ -10,4 +10,5 @@ public interface UserRepository extends JpaRepository<User,Integer> {
 
     //根据Id查询用户
     public User findById(int id);
+
 }
