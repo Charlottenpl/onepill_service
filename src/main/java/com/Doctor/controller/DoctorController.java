@@ -64,39 +64,9 @@ public class DoctorController {
     //更新医生信息
     @ApiOperation("更新医生信息")
     @PostMapping(value = "/update")
-    public String update(@RequestParam("id")int id,@RequestParam("code")String code,@RequestParam("str")String str){
+    public String update(@RequestParam("json")String json){
         try{
-            //获取Id
-            Doctor doctor = this.doctorRepository.findById(id);
-            switch (code){
-                case "name":
-                    doctor.setName(str);
-                    break;
-                case "phonne":
-                    doctor.setPhone(str);
-                    break;
-                case "address":
-                    doctor.setAddress(str);
-                    break;
-                case "password":
-                    doctor.setPassword(str);
-                    break;
-                case "PID":
-                    doctor.setPID(str);
-                    break;
-                case "hospital":
-                    doctor.setHospital(str);
-                    break;
-                case "headImg":
-                    doctor.setHeadImg(str);
-                    break;
-                case "tag":
-                    doctor.setTag(str);
-                    break;
-                case "resume":
-                    doctor.setResume(str);
-                    break;
-            }
+            Doctor doctor = gson.fromJson(json,Doctor.class);
             this.doctorRepository.save(doctor);
             return "yes";
         }catch (Exception e){
