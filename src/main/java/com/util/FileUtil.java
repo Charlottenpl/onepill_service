@@ -4,6 +4,7 @@ import org.springframework.web.multipart.MultipartFile;
 
 import java.io.File;
 import java.io.IOException;
+import java.util.UUID;
 
 public class FileUtil {
 
@@ -23,6 +24,8 @@ public class FileUtil {
         System.out.println("后缀:" + suffix);
 
         //指定保存的目录
+        String uuid = UUID.randomUUID().toString();
+        fileName = fileName+uuid;
         File targetFile = new File(path, fileName + "." + suffix);
         if (!targetFile.getParentFile().exists()) { //注意，判断父级路径是否存在
             targetFile.getParentFile().mkdirs();
