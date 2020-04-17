@@ -31,8 +31,8 @@ public class FileUploadController {
 
 
     // 文件上传
-    @PostMapping("/up")
-    public String handleFileUpload(@RequestParam("file") MultipartFile file, @RequestParam("userId") int userId) throws Exception {
+    @PostMapping("/image")
+    public String upImage(@RequestParam("file") MultipartFile file, @RequestParam("userId") int userId) throws Exception {
 
 
         String fileName = FileUtil.saveFile(file, uploadPicPath, userId + "_headImg");
