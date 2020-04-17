@@ -59,7 +59,7 @@ public class InquiryController {
     }
 
     //根据UserId查询
-    @PostMapping("/findByUserId")
+    @GetMapping("/findByUserId")
     @ApiOperation("根据userId查询问诊记录")
     public String findByUserId(@RequestParam("userId")int userId){
         return gson.toJson(this.inquiryService.findById(userId));
