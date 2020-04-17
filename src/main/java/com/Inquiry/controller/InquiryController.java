@@ -30,12 +30,13 @@ public class InquiryController {
     @PostMapping("/add")
     @ApiOperation("添加问诊记录")
     public String add(@RequestParam("json")String json){
+        Inquiry inquiry = null;
         try{
-            Inquiry inquiry = gson.fromJson(json,Inquiry.class);
+            inquiry = gson.fromJson(json,Inquiry.class);
             this.inquiryService.add(inquiry);
             return "yes";
         }catch (Exception e){
-            return "no";
+            return inquiry.toString();
         }
     }
 

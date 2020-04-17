@@ -32,6 +32,6 @@ public class FileUtil {
         }
         //保存
         file.transferTo(targetFile);
-        return "/image/"+fileName + "." + suffix;
+        return "/image/inquiry_img/"+fileName + "." + suffix;
     }
 }

@@ -40,7 +40,7 @@ public class FileUploadController {
     //问诊图片上传
     @PostMapping("/inquiry")
     public String upInquiry_img(@RequestParam("file")MultipartFile file) throws IOException {
-        String path = uploadPicPath+"/inquiry_img";
+        String path = uploadPicPath+"/inquiry_img/";
         String fileName = FileUtil.saveFile(file,path,"inquiry_img");
         return fileName;
 
