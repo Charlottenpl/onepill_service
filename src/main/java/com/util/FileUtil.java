@@ -27,11 +27,12 @@ public class FileUtil {
         String uuid = UUID.randomUUID().toString();
         fileName = fileName+uuid;
         File targetFile = new File(path, fileName + "." + suffix);
+        System.out.println("保存头像："+path+fileName+"."+suffix);
         if (!targetFile.getParentFile().exists()) { //注意，判断父级路径是否存在
             targetFile.getParentFile().mkdirs();
         }
         //保存
         file.transferTo(targetFile);
-        return "/image/inquiry_img/"+fileName + "." + suffix;
+        return fileName + "." + suffix;
     }
 }

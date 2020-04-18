@@ -27,13 +27,15 @@ public class FileUploadController {
     public String upImage(@RequestParam("file") MultipartFile file, @RequestParam("userId") int userId) throws Exception {
 
 
-        String fileName = FileUtil.saveFile(file, uploadPicPath, userId + "_headImg");
+        String fileName = FileUtil.saveFile(file, uploadPicPath+"/headImg", userId + "_headImg");
 
         //更新数据库
         User user = this.userService.findById(userId);
-        user.setHeadImg(fileName);
+        System.out.println("更新前："+user.toString());
+        user.setHeadImg("/image/headImg/"+fileName);
+        System.out.println("更新后："+user.toString());
         this.userService.save(user);
-        return fileName;
+        return "/image/headImg/"+fileName;
 
     }
 
@@ -42,7 +44,7 @@ public class FileUploadController {
     public String upInquiry_img(@RequestParam("file")MultipartFile file) throws IOException {
         String path = uploadPicPath+"/inquiry_img/";
         String fileName = FileUtil.saveFile(file,path,"inquiry_img");
-        return fileName;
+        return "/image/inquiry_img/"+fileName;
 
     }
 

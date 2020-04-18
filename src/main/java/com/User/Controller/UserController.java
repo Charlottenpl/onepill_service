@@ -76,6 +76,7 @@ public class UserController {
     @PostMapping("/update")
     public String update(@RequestParam("json")String json){
         try{
+            System.out.println("更新用户数据："+json);
             this.userService.save(gson.fromJson(json,User.class));
             return "yes";
         }catch (Exception e){
