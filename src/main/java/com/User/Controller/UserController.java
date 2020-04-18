@@ -78,7 +78,7 @@ public class UserController {
         try{
             System.out.println("更新用户数据："+json);
             this.userService.save(gson.fromJson(json,User.class));
-            return "yes";
+            return json;
         }catch (Exception e){
             return "no";
         }
