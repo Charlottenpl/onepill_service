@@ -39,4 +39,15 @@ public class CommentController {
         }
     }
 
+    @RequestMapping(value = "/update",method = RequestMethod.POST)
+    public String update(@RequestBody String json){
+        try{
+            Comment comment = gson.fromJson(json,Comment.class);
+            this.commentService.update(comment);
+            return "true";
+        }catch (Exception e){
+            e.printStackTrace();
+            return "false";
+        }
+    }
 }

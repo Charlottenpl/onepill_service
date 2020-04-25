@@ -11,7 +11,10 @@ public class Comment {
     private String ccomment;
     private String headImg;
     private int articleId;
-
+    private int isGood;
+    private int isBad;
+    private int goodNum;
+    private int badNum;
     @Id
     @GeneratedValue(strategy= GenerationType.IDENTITY)
     public int getId() {
@@ -52,6 +55,38 @@ public class Comment {
 
     public void setArticleId(int articleId) {
         this.articleId = articleId;
+    }
+
+    public int getIsGood() {
+        return isGood;
+    }
+
+    public void setIsGood(int isGood) {
+        this.isGood = isGood;
+    }
+
+    public int getIsBad() {
+        return isBad;
+    }
+
+    public void setIsBad(int isBad) {
+        this.isBad = isBad;
+    }
+
+    public int getGoodNum() {
+        return goodNum;
+    }
+
+    public void setGoodNum(int goodNum) {
+        this.goodNum = goodNum;
+    }
+
+    public int getBadNum() {
+        return badNum;
+    }
+
+    public void setBadNum(int badNum) {
+        this.badNum = badNum;
     }
 
     @Override
