@@ -56,6 +56,7 @@ public class User {
         this.PID = PID;
     }
 
+    @Column(insertable = false)
     public String getHeadImg() {
         return headImg;
     }

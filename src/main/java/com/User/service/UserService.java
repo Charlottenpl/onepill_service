@@ -23,6 +23,8 @@ public class UserService {
         this.userRepository.save(user);
     }
 
+
+
     //删除用户
     public void delete(int id){
         this.userRepository.deleteById(id);
