@@ -2,7 +2,9 @@ package com.Cart.Dao;
 
 import com.entity.Cart;
 import org.springframework.data.jpa.repository.JpaRepository;
+import org.springframework.data.jpa.repository.Modifying;
 
+import javax.transaction.Transactional;
 import java.util.List;
 
 public interface CartRepository extends JpaRepository<Cart,Integer> {
@@ -11,5 +13,8 @@ public interface CartRepository extends JpaRepository<Cart,Integer> {
     public List<Cart> findByUserId(int userId);
 
     //根据ID删除
+    @Modifying
+    @Transactional
     public int deleteCartById(int id);
+
 }
