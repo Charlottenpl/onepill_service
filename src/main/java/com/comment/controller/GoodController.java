@@ -36,8 +36,8 @@ public class GoodController {
             good.setUserId(userId);
             this.goodService.add(good);
             Comment comment = this.commentService.findById(commentId);
-            int goodNum = comment.getGoodNum();
-            comment.setGoodNum(goodNum++);
+            int goodNum = comment.getGoodNum()+1;
+            comment.setGoodNum(goodNum);
             this.commentService.update(comment);
             return "yes";
         }catch (Exception e){
@@ -50,8 +50,8 @@ public class GoodController {
         try{
             this.goodService.del(userId, commentId);
             Comment comment = this.commentService.findById(commentId);
-            int goodNum = comment.getGoodNum();
-            comment.setGoodNum(goodNum--);
+            int goodNum = comment.getGoodNum()-1;
+            comment.setGoodNum(goodNum);
             this.commentService.update(comment);
             return "yes";
         }catch (Exception e){

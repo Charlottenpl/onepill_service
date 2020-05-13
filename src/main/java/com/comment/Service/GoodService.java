@@ -20,7 +20,12 @@ public class GoodService {
 
     //查询是否已经点赞
     public boolean isGood(int userId, int commentId) {
-        return this.goodRepository.findByUserIdAndCommentId(userId, commentId);
+        Good g = this.goodRepository.findByUserIdAndCommentId(userId,commentId);
+        if (g != null) {
+            return true;
+        }else {
+            return false;
+        }
     }
 
     //点赞
@@ -30,7 +35,7 @@ public class GoodService {
 
     //取消点赞
     public void del(int userId,int commentId) {
-        this.goodRepository.deleteByUserIdAndCommentId(userId, commentId);
+        this.goodRepository.deleteByUserIdAndCommentId(Integer.valueOf(userId), Integer.valueOf(commentId));
     }
 
     //根据userId查询点赞的评论

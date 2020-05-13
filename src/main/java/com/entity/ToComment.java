@@ -2,6 +2,7 @@ package com.entity;
 
 import com.Doctor.service.DoctorService;
 import com.User.service.UserService;
+import com.comment.Service.GoodService;
 
 public class ToComment {
     private int id;
@@ -102,7 +103,7 @@ public class ToComment {
                 '}';
     }
 
-    public static ToComment fromCommentTo(Comment c, DoctorService doctorService, UserService userService){
+    public static ToComment fromCommentTo(Comment c, DoctorService doctorService, UserService userService, GoodService goodService,int userId,int userType){
         ToComment toComment = new ToComment();
         Doctor doctor = new Doctor();
         User user = new User();
@@ -124,6 +125,12 @@ public class ToComment {
             toComment.setName(user.getNickName());
             toComment.setHeadImg(user.getHeadImg());
         }
+        if (userType == 2){
+            toComment.setGood(goodService.isGood(userId, c.getId()));
+        }else {
+            toComment.setGood(false);
+        }
+
 
         return toComment;
     }
@@ -135,6 +142,7 @@ public class ToComment {
         comment.setUserType(toComment.getUserType());
         comment.setArticleId(toComment.getArticleId());
         comment.setGoodNum(toComment.getGoodNum());
+        comment.setCcomment(toComment.getCcomment());
         return comment;
     }
 }
