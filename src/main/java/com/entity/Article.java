@@ -7,10 +7,9 @@ import javax.persistence.*;
 public class Article {
     private int id;
     private String title;
-    private String headImg;
     private String content;
     private String tag;
-    private String writerName;
+    private int userId;
 
     @Id
     @GeneratedValue(strategy= GenerationType.IDENTITY)
@@ -30,14 +29,6 @@ public class Article {
         this.title = title;
     }
 
-    public String getHeadImg() {
-        return headImg;
-    }
-
-    public void setHeadImg(String headImg) {
-        this.headImg = headImg;
-    }
-
     public String getContent() {
         return content;
     }
@@ -54,12 +45,12 @@ public class Article {
         this.tag = tag;
     }
 
-    public String getWriterName() {
-        return writerName;
+    public int getUserId() {
+        return userId;
     }
 
-    public void setWriterName(String writerName) {
-        this.writerName = writerName;
+    public void setUserId(int userId) {
+        this.userId = userId;
     }
 
     @Override
@@ -67,10 +58,9 @@ public class Article {
         return "Article{" +
                 "id=" + id +
                 ", title='" + title + '\'' +
-                ", headImg='" + headImg + '\'' +
                 ", content='" + content + '\'' +
                 ", tag='" + tag + '\'' +
-                ", writerName='" + writerName + '\'' +
+                ", userId=" + userId +
                 '}';
     }
 }
