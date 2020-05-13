@@ -102,12 +102,22 @@ public class CartController {
         }
     }
 
-    //
-}
-/*
-try{
-        return "yes";
+    //批量删除
+    @ApiOperation("批量删除购物车")
+    @RequestMapping(value = "/deleteList",method = RequestMethod.POST)
+    public String deleteIn(@RequestParam("ids") String ids){
+        try{
+            //把字符串前后多余的空格去掉
+            ids.trim();
+            String[] list_id = ids.split(",");
+            List<Integer> list = new ArrayList<Integer>();
+            for(String id : list_id) {
+                list.add(Integer.parseInt(id));
+            }
+            this.cartService.deleteInBatch(list);
+            return "yes";
         }catch (Exception e){
-        return "no";
+            return "no";
         }
-        */
+    }
+}

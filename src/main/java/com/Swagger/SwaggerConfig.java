@@ -36,7 +36,7 @@ public class SwaggerConfig {
         return new ApiInfoBuilder()
                 .title("OnePill API")
                 .description("OnePill服务端接口")
-                .termsOfServiceUrl("http://114.55.145.131:8070/onepill/address/list")
+                .termsOfServiceUrl("http://192.168.137.1:8070/onepill/address/list")
                 .version("1.0")
                 .contact(contact)
                 .build();
