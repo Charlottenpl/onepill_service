@@ -70,11 +70,11 @@ public class CommentController {
     //添加评论
     @RequestMapping(value = "/add", method = RequestMethod.POST)
     @ApiOperation("添加评论")
-    public String add(@RequestBody String json) {
+    public String add(@RequestParam(name = "json") String json) {
+        System.out.println("插入评论"+json);
         try {
             ToComment comment = gson.fromJson(json, ToComment.class);
             this.commentService.add(ToComment.fromToCommentTo(comment));
-            System.out.print(comment.toString()+"\n"+ToComment.fromToCommentTo(comment).toString());
             return "true";
         } catch (Exception e) {
             return "false";
