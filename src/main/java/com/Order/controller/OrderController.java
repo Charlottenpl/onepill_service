@@ -1,14 +1,17 @@
 package com.Order.controller;
 
 
+import com.Medicine.service.MedicineService;
 import com.Order.service.OrderService;
-import com.entity.Order;
+import com.entity.*;
 import com.google.gson.Gson;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
 import org.springframework.web.bind.annotation.*;
 
 import javax.annotation.Resource;
+import java.util.ArrayList;
+import java.util.List;
 
 @RestController
 @RequestMapping("/order")
@@ -17,6 +20,8 @@ public class OrderController {
 
     @Resource
     OrderService orderService;
+    @Resource
+    MedicineService medicineService;
     Gson gson = new Gson();
 
     //添加
@@ -55,7 +60,27 @@ public class OrderController {
     @ApiOperation("根据userId查询订单")
     @GetMapping("/findByUserId")
     public String findByUserId(@RequestParam("userId")int userId){
-        return gson.toJson(this.orderService.findByUserId(userId));
+        List<Order> orderList = this.orderService.findByUserId(userId);
+        List<MyOrder> myOrderList = new ArrayList<>();
+        Medicine medicine = null;
+        for (int i= 0;i<orderList.size();i++) {
+            MyOrder myOrder = new MyOrder();
+            Order order= orderList.get(i);
+            medicine = this.medicineService.findById(order.getMedicineId());
+            myOrder.setId(order.getId());
+            myOrder.setUserId(order.getUserId());
+            myOrder.setMedicineId(order.getMedicineId());
+            myOrder.setCount(order.getCount());
+            myOrder.setImg(order.getImg());
+            myOrder.setStatus(order.getStatus());
+            int price = Integer.valueOf(medicine.getPrice());
+            myOrder.setPrice(price*order.getCount());
+
+            myOrderList.add(i,myOrder);
+        }
+        String result = gson.toJson(myOrderList);
+        System.out.println(result);
+        return result;
     }
 
     //根据medicineId

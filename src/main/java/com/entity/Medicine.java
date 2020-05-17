@@ -12,7 +12,7 @@ public class Medicine {
     private int id;
     private String generalName;
     private String medicine;
-    private String price;
+    private int price;
     private String overview;
     private String function;
     private String introdutions;
@@ -49,11 +49,11 @@ public class Medicine {
         this.medicine = medicine;
     }
 
-    public String getPrice() {
+    public int getPrice() {
         return price;
     }
 
-    public void setPrice(String price) {
+    public void setPrice(int price) {
         this.price = price;
     }
 

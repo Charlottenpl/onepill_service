@@ -40,16 +40,6 @@ public class CommentController {
         List<ToComment> toCommentList = new ArrayList<>();
         for (Comment c : commentList
         ) {
-//            toComment.setId(c.getId());
-//            toComment.setArticleId(c.getArticleId());
-//            toComment.setUserId(c.getUserId());
-//            toComment.setUserType(c.getUserType());
-//            toComment.setCcomment(c.getCcomment());
-//            toComment.setGoodNum(c.getGoodNum());
-//
-//            doctor = doctorService.findById(c.getUserId());
-//            toComment.setName(doctor.getName());
-//            toComment.setHeadImg(doctor.getHeadImg());
             toCommentList.add(ToComment.fromCommentTo(c, doctorService,userService,goodService,userId,userType));
         }
         return gson.toJson(toCommentList);

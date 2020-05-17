@@ -41,4 +41,9 @@ public class CartService {
         }
     }
 
+    //根据userId删除
+    public void deleteByUserId(int userId){
+        this.cartRepository.deleteByUserId(userId);
+    }
+
 }

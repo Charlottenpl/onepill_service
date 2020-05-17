@@ -80,7 +80,7 @@ public class CartController {
     }
     //根据ID删除购物车
     @ApiOperation("移出购物车")
-    @RequestMapping(value = "/delete",method = RequestMethod.POST)
+    @RequestMapping(value = "/delete",method = RequestMethod.GET)
     public String delete(@RequestParam("id")int id){
         try{
             this.cartService.delete(id);
