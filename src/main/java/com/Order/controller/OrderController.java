@@ -73,7 +73,7 @@ public class OrderController {
             myOrder.setCount(order.getCount());
             myOrder.setImg(order.getImg());
             myOrder.setStatus(order.getStatus());
-            int price = Integer.valueOf(medicine.getPrice());
+            int price =medicine.getPrice();
             myOrder.setPrice(price*order.getCount());
 
             myOrderList.add(i,myOrder);

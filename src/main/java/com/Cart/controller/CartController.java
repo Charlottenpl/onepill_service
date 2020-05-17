@@ -9,10 +9,7 @@ import com.google.gson.Gson;
 import com.Cart.service.CartService;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestMethod;
-import org.springframework.web.bind.annotation.RequestParam;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 import javax.annotation.Resource;
 import java.util.ArrayList;
@@ -59,6 +56,7 @@ public class CartController {
             myCart.setStandard(medicine.getStandard());
             myCart.setPrice(c.getPrice());
             myCart.setStatus(c.getStatus());
+            myCart.setMedicineId(medicine.getId());
             myCartList.add(i,myCart);
         }
         String result = gson.toJson(myCartList);
@@ -115,6 +113,18 @@ public class CartController {
                 list.add(Integer.parseInt(id));
             }
             this.cartService.deleteInBatch(list);
+            return "yes";
+        }catch (Exception e){
+            return "no";
+        }
+    }
+
+    //根据UserId删除
+    @PostMapping("/deleteByUserId")
+    public String deleteByUserId(@RequestParam("userId")int userId){
+        try{
+            //把字符串前后多余的空格去掉
+            this.cartService.deleteByUserId(userId);
             return "yes";
         }catch (Exception e){
             return "no";
