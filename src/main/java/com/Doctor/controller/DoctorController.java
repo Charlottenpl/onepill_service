@@ -10,6 +10,7 @@ import io.swagger.annotations.ApiOperation;
 import org.springframework.web.bind.annotation.*;
 
 import javax.annotation.Resource;
+import java.util.List;
 
 @RestController
 @RequestMapping("/doctor")
@@ -20,25 +21,31 @@ public class DoctorController {
     private DoctorService doctorService;
     Gson gson = new Gson();
 
+    @RequestMapping(value = "/getList", method = RequestMethod.GET)
+    public String getList() {
+        List<Doctor> list = doctorService.findAllDoctor();
+        return gson.toJson(list);
+    }
+
     //医生登录
-    @RequestMapping(value = "/login",method = RequestMethod.GET)
-    public String doctorLogin(@RequestParam(name = "phone") String phone, @RequestParam(name = "password") String password){
+    @RequestMapping(value = "/login", method = RequestMethod.GET)
+    public String doctorLogin(@RequestParam(name = "phone") String phone, @RequestParam(name = "password") String password) {
         Doctor doctor = doctorService.doctorLogin(phone, password);
         Result result = new Result();
         gson = new Gson();
-        if(doctor.getPhone().equals(phone) && doctor.getPassword().equals(password)){
+        if (doctor.getPhone().equals(phone) && doctor.getPassword().equals(password)) {
             result.setCode(1);
             result.setDoctor(doctor);
             String str1 = gson.toJson(result);
             System.out.println("医生登录成功！");
             return str1;
-        }else if(!doctor.getPhone().equals(phone)){
+        } else if (!doctor.getPhone().equals(phone)) {
             result.setCode(2);
             result.setDoctor(doctor);
             String str2 = gson.toJson(result);
             System.out.println("医生登录失败,电话错误！");
             return str2;
-        }else if(!doctor.getPassword().equals(password)){
+        } else if (!doctor.getPassword().equals(password)) {
             result.setCode(3);
             result.setDoctor(doctor);
             String str3 = gson.toJson(result);
@@ -50,8 +57,8 @@ public class DoctorController {
 
     //添加医生
     @ApiOperation("增加医生")
-    @RequestMapping(value = "/register",method = RequestMethod.POST)
-    public String add(@RequestBody String json){
+    @RequestMapping(value = "/register", method = RequestMethod.POST)
+    public String add(@RequestBody String json) {
         gson = new Gson();
         Doctor doctor = gson.fromJson(json, Doctor.class);
         boolean isSuccessful = this.doctorService.add(doctor);
@@ -66,38 +73,38 @@ public class DoctorController {
 
     //根据ID删除医生
     @ApiOperation("根据ID删除医生")
-    @RequestMapping(value = "/delete",method = RequestMethod.POST)
-    public String delete(@RequestParam("id")int id){
-        try{
+    @RequestMapping(value = "/delete", method = RequestMethod.POST)
+    public String delete(@RequestParam("id") int id) {
+        try {
             this.doctorService.delete(id);
             return "yes";
-        }catch (Exception e){
+        } catch (Exception e) {
             return "no";
         }
     }
 
     //查询所有医生
     @ApiOperation("查询所有医生")
-    @RequestMapping(value = "/doctor",method = RequestMethod.POST)
-    public String list(){
+    @RequestMapping(value = "/doctor", method = RequestMethod.POST)
+    public String list() {
         return gson.toJson(this.doctorService.findAllDoctor());
     }
 
     //根据Id查询医生
     @ApiOperation("根据Id查询医生")
-    @RequestMapping(value = "/findById",method = RequestMethod.GET)
-    public String findById(@RequestParam("id")int id){
-        System.out.println("查询的Id："+id);
+    @RequestMapping(value = "/findById", method = RequestMethod.GET)
+    public String findById(@RequestParam("id") int id) {
+        System.out.println("查询的Id：" + id);
         return gson.toJson(this.doctorService.findById(id));
     }
 
     //更新医生信息
     @ApiOperation("更新医生信息")
     @PostMapping(value = "/update")
-    public String update(@RequestParam("json")String json){
-        try{
+    public String update(@RequestParam("json") String json) {
+        try {
             //获取Id
-            Doctor doctor = gson.fromJson(json,Doctor.class);
+            Doctor doctor = gson.fromJson(json, Doctor.class);
 //            switch (code){
 //                case "name":
 //                    doctor.setName(str);
@@ -129,7 +136,7 @@ public class DoctorController {
 //            }
             this.doctorService.add(doctor);
             return gson.toJson(doctor);
-        }catch (Exception e){
+        } catch (Exception e) {
             return "no";
         }
     }
@@ -137,7 +144,7 @@ public class DoctorController {
     //根据Name查询医生
     @ApiOperation("更新医生信息")
     @GetMapping(value = "/findByName")
-    public String findByName(@RequestParam("name")String name){
+    public String findByName(@RequestParam("name") String name) {
         return gson.toJson(this.doctorService.findByName(name));
     }
 }

@@ -9,35 +9,42 @@ import io.swagger.annotations.ApiOperation;
 import org.springframework.web.bind.annotation.*;
 
 import javax.annotation.Resource;
+import java.util.List;
 
 @RestController
 @RequestMapping("/user")
-@Api( value = "用户服务器")
+@Api(value = "用户服务器")
 public class UserController {
 
     @Resource
     private UserService userService;
     Gson gson = new Gson();
 
+    @RequestMapping(value = "/list", method = RequestMethod.GET)
+    public String list() {
+        List<User> list = userService.findAll();
+        return gson.toJson(list);
+    }
+
     @ApiOperation("用户登陆")
-    @RequestMapping(value = "/login",method = RequestMethod.GET)
-    public String userLogin(@RequestParam (name = "phone") String phone,@RequestParam(name = "password") String password){
+    @RequestMapping(value = "/login", method = RequestMethod.GET)
+    public String userLogin(@RequestParam(name = "phone") String phone, @RequestParam(name = "password") String password) {
         System.out.println("开始登陆");
         User user = userService.userLogin(phone, password);
         Result result = new Result();
-        if(user.getPhone().equals(phone) && user.getPassword().equals(password)){
+        if (user.getPhone().equals(phone) && user.getPassword().equals(password)) {
             result.setCode(1);
             result.setUser(user);
             String str1 = gson.toJson(result);
             System.out.println("病人登录成功！");
-           return str1;
-        }else if(!user.getPhone().equals(phone)){
+            return str1;
+        } else if (!user.getPhone().equals(phone)) {
             result.setCode(2);
             result.setUser(user);
             String str2 = gson.toJson(result);
             System.out.println("病人登录失败,电话错误！");
             return str2;
-        }else if(!user.getPassword().equals(password)){
+        } else if (!user.getPassword().equals(password)) {
             result.setCode(3);
             result.setUser(user);
             String str3 = gson.toJson(result);
@@ -50,11 +57,11 @@ public class UserController {
 
     @ApiOperation("添加用户")
     @PostMapping("/add")
-    public String add(@RequestParam("json") String json){
-        try{
-            this.userService.save(gson.fromJson(json,User.class));
+    public String add(@RequestParam("json") String json) {
+        try {
+            this.userService.save(gson.fromJson(json, User.class));
             return "yes";
-        }catch (Exception e){
+        } catch (Exception e) {
             return "no";
         }
 
@@ -62,11 +69,11 @@ public class UserController {
 
     @ApiOperation("删除用户")
     @GetMapping("/delete")
-    public String delete(@RequestParam("id")int id){
-        try{
+    public String delete(@RequestParam("id") int id) {
+        try {
             this.userService.delete(id);
             return "yes";
-        }catch (Exception e){
+        } catch (Exception e) {
             return "no";
         }
     }
@@ -74,12 +81,12 @@ public class UserController {
 
     @ApiOperation("更新用户信息")
     @PostMapping("/update")
-    public String update(@RequestParam("json")String json){
-        try{
-            System.out.println("更新用户数据："+json);
-            this.userService.save(gson.fromJson(json,User.class));
+    public String update(@RequestParam("json") String json) {
+        try {
+            System.out.println("更新用户数据：" + json);
+            this.userService.save(gson.fromJson(json, User.class));
             return json;
-        }catch (Exception e){
+        } catch (Exception e) {
             return "no";
         }
     }
@@ -87,14 +94,14 @@ public class UserController {
 
     @ApiOperation("根据Id查询用户")
     @GetMapping("/findById")
-    public String findById(@RequestParam("id")int id){
+    public String findById(@RequestParam("id") int id) {
         return gson.toJson(this.userService.findById(id));
     }
 
     @RequestMapping(value = "/register", method = RequestMethod.POST)
     public String userRegister(@RequestBody String json) {
         this.gson = new Gson();
-        User user = gson.fromJson(json,User.class);
+        User user = gson.fromJson(json, User.class);
         boolean isSuccessful = this.userService.userRegister(user);
         if (isSuccessful) {
             String result = gson.toJson(true);

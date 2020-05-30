@@ -6,6 +6,7 @@ import com.google.gson.Gson;
 import org.springframework.stereotype.Service;
 
 import javax.annotation.Resource;
+import java.util.List;
 
 @Service
 public class UserService {
@@ -14,24 +15,26 @@ public class UserService {
     UserRepository userRepository;
 
     //用户登陆
-    public User userLogin(String phone,String password){
+    public User userLogin(String phone, String password) {
         return userRepository.findUserByPhoneAndPassword(phone, password);
     }
 
     //添加用户
-    public void save(User user){
+    public void save(User user) {
         this.userRepository.save(user);
     }
 
-
+    public List<User> findAll() {
+        return this.userRepository.findAll();
+    }
 
     //删除用户
-    public void delete(int id){
+    public void delete(int id) {
         this.userRepository.deleteById(id);
     }
 
     //根据Id查询用户
-    public User findById(int id){
+    public User findById(int id) {
         return this.userRepository.findById(id);
     }
 
