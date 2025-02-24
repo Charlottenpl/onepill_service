@@ -22,6 +22,7 @@ public class SwaggerConfig {
     public Docket createRestApi(){
         return new Docket(DocumentationType.SWAGGER_2)
                 .apiInfo(apiInfo())
+                .enable(true)
                 .select()
                 //此处根据情况自行添加需要将哪些接口纳入Swagger 文档管理。此处应用basePackage管理，还可以利用注解管理
                 //如果填写错误的话会出现“No operations defined in spec!” 的问题。
@@ -36,7 +37,7 @@ public class SwaggerConfig {
         return new ApiInfoBuilder()
                 .title("OnePill API")
                 .description("OnePill服务端接口")
-                .termsOfServiceUrl("http://192.168.137.1:8070/onepill/address/list")
+                .termsOfServiceUrl("https://echopl.fun/api/ui/api")
                 .version("1.0")
                 .contact(contact)
                 .build();

@@ -11,7 +11,6 @@ import com.google.gson.Gson;
 import com.google.gson.reflect.TypeToken;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
-import javafx.geometry.Pos;
 import org.springframework.web.bind.annotation.*;
 
 import javax.annotation.Resource;
